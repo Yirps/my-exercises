@@ -1,9 +1,9 @@
-package io.codeforall.test;
+package MyWorld.src.io.codeforall.test;
 
 public class Game {
 
-    RandomGenerator numGenerator = new RandomGenerator();//creating a new random generator and assigning it to a variable
-    Player player = new Player();                        //creating a new player and assigning it to a variable player
+    io.codeforall.test.RandomGenerator numGenerator = new io.codeforall.test.RandomGenerator();//creating a new random generator and assigning it to a variable
+    io.codeforall.test.Player player = new io.codeforall.test.Player();                        //creating a new player and assigning it to a variable player
 
     public void compareNums() {//method that is gonna compare both numbers
         int botNum = numGenerator.numGenerat();//creating a variable that is gonna call the method numgenerator
