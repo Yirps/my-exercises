@@ -13,7 +13,7 @@ public class Game {
         this.shotsFired = 0;
     }
 
-    public GameObject[] createGameObjects(int numberObjects){
+    public GameObject[] createGameObjects(int numberObjects) {
         GameObject[] gameObjects = new GameObject[numberObjects];
         for (int i = 0; i < numberObjects; i++) {
             double rand = Math.random();
@@ -21,18 +21,22 @@ public class Game {
                 gameObjects[i] = new ArmouredEnemy(100, 150);
             } else if (rand > 0.9) {
                 gameObjects[i] = new Tree();
-            } else if (rand < 0.7){
+            } else if (rand < 0.7) {
                 gameObjects[i] = new SoldierEnemy(100);
             } else {
-                gameObjects[i] = new Barrel(BarrelType.values()[(int)(Math.random() * BarrelType.values().length)]);
+                gameObjects[i] = new Barrel(BarrelType.values()[(int) (Math.random() * BarrelType.values().length)]);
             }
         }
         return gameObjects;
     }
 
     public void start() {
-        for (GameObject obj1 : this.gameObjects) {
-
+        for (int i = 0; i < this.gameObjects.length; i++) {
+            GameObject obj1 = this.gameObjects[i];
+            if(i > 0 && this.gameObjects[i - 1] instanceof Barrel && ((Destroyable)this.gameObjects[i - 1]).isDestroyed()){
+               ((Destroyable)this.gameObjects[i]).setDestroyed();
+               continue;
+            }
             if (obj1 instanceof Tree) {
                 System.out.println("Found tree. Ignoring...");
                 System.out.println(" ");
@@ -42,6 +46,17 @@ public class Game {
                 while (!((Destroyable) obj1).isDestroyed()) {
                     this.sniperRifle.shoot((Destroyable) obj1);
                     this.shotsFired++;
+                }
+
+                if (obj1 instanceof Barrel) {
+                    if (i > 0 && !((Destroyable) this.gameObjects[i - 1]).isDestroyed()) {
+                        ((Destroyable) this.gameObjects[i - 1]).setDestroyed();
+                        //System.out.println("U destroyed a " + obj1.getMessage());
+                    }
+                    if (i < this.gameObjects.length - 1 /*&& this.gameObjects[i + 1] instanceof Barrel*/) {
+                        ((Destroyable) this.gameObjects[i + 1]).setDestroyed();
+                        //System.out.println("U destroyed a " + obj1.getMessage());
+                    }
                 }
             }
         }

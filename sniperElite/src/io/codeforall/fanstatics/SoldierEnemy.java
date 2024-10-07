@@ -21,6 +21,14 @@ public class SoldierEnemy extends Enemy {
     }
 
     @Override
+    public void setDestroyed(){
+        if(!this.isDead) {
+            this.isDead = true;
+            System.out.println("Soldier dead.");
+        }
+    }
+
+    @Override
     public String getMessage(){
         return "U found an enemy.";
     }

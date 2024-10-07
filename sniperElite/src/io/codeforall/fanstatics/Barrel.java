@@ -16,9 +16,7 @@ public class Barrel extends GameObject implements Destroyable{
     public void hit(int damage){
         this.currentDamage += damage;
         if(this.currentDamage >= this.barrelType.maxDamage){
-            System.out.println("Barrel destroyed.");
-            System.out.println(" ");
-            this.destroyed = true;
+            setDestroyed();
         }
     }
 
@@ -27,8 +25,15 @@ public class Barrel extends GameObject implements Destroyable{
         return this.destroyed;
     }
 
+    public void setDestroyed(){
+        if(!this.destroyed) {
+            System.out.println("Barrel destroyed.");
+            this.destroyed = true;
+        }
+    }
+
     @Override
     public String getMessage(){
-        return "U found a " + barrelType.toString().toLowerCase() + " barrel.";
+        return "Found a " + barrelType.toString().toLowerCase() + " barrel.";
     }
 }

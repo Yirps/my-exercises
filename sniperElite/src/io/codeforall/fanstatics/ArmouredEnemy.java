@@ -30,6 +30,14 @@ public class ArmouredEnemy extends Enemy{
     }
 
     @Override
+    public void setDestroyed(){
+        if(!this.isDead) {
+            this.isDead = true;
+            System.out.println("Armoured soldier dead.");
+        }
+    }
+
+    @Override
     public String getMessage(){
         return "U found an armoured enemy.";
     }
