@@ -10,7 +10,7 @@ public class Genie {
         this.maxWish = maxWish;
     }
 
-    public static void summoned(int maxGenies, int rubNum, boolean odd, boolean) {
+    public void summoned(int maxGenies, int rubNum) {
 
         if (maxGenies < rubNum) {
             Demon demon = new Demon();
@@ -18,17 +18,17 @@ public class Genie {
             //demon.makeWish();
             return;
         }
-        if (!odd) {
-            setOdd();
+        if (!Lamp.getOdd()) {
+            Lamp.setOdd();
             FriendlyGenie friendlyGenie = new FriendlyGenie();
             System.out.println("FriendlyGenie summoned");
-            // friendlyGenie.makeWish();
+            // friendlyGenie.makeWish();x
             return;
         }
         GrumpyGenie grumpyGenie = new GrumpyGenie();
         System.out.println("GrumpyGenie summoned");
         //grumpyGenie.makeWish();
-        setOdd();
+        Lamp.setOdd();
     }
 
     public void makeWish() {

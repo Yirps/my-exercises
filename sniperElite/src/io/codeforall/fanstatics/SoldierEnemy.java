@@ -11,12 +11,17 @@ public class SoldierEnemy extends Enemy {
 
     @Override
     public void hit(int damage) {
-        System.out.println("Soldier Enemy shot.");
         this.health -= damage;
 
         if (this.health <= 0) {
             this.isDead = true;
             System.out.println("Soldier Enemy died.");
+            System.out.println(" ");
         }
+    }
+
+    @Override
+    public String getMessage(){
+        return "U found an enemy.";
     }
 }

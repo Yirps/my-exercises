@@ -12,14 +12,18 @@ public class Lamp {
         this.maxGenies = maxGenies;
     }
 
-    public void setOdd() {
-        odd = !odd;
+    public boolean getOdd(){
+        return odd;
     }
 
-    public Genie rubLamp(int maxWish ) {
+    public boolean setOdd() {
+        return odd = !odd;
+    }
+
+    public  Genie rubLamp(int maxWish ) {
         rubNum++;
         System.out.print("Rub: " + rubNum + " - ");
-        Genie.summoned(maxGenies, rubNum, odd, setOdd());
+        Genie.summoned(maxGenies, rubNum);
         return new Genie(maxWish);
     }
 

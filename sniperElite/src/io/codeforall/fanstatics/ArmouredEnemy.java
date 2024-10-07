@@ -10,7 +10,6 @@ public class ArmouredEnemy extends Enemy{
     }
     @Override
     public void hit(int damage){
-        System.out.println("Armoured enemy shot.");
         if(this.armour > damage){
             this.armour -= damage;
             return;
@@ -24,8 +23,14 @@ public class ArmouredEnemy extends Enemy{
 
         if(this.health <= 0){
             System.out.println("Armoured Enemy died.");
+            System.out.println(" ");
             this.isDead = true;
         }
+
     }
 
+    @Override
+    public String getMessage(){
+        return "U found an armoured enemy.";
+    }
 }

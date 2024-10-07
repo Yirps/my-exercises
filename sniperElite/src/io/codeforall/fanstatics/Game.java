@@ -6,31 +6,41 @@ public class Game {
     public int shotsFired;
 
     public Game(int numberObjects, int rifleDamage) {
-        this.gameObjects = new GameObject[numberObjects];
-        for (int i = 0; i < this.gameObjects.length; i++) {
-            double rand = Math.random();
-            if (rand < 0.3) {
-                gameObjects[i] = new ArmouredEnemy(100, 20);
-            } else if (rand > 0.9) {
-                gameObjects[i] = new Tree();
-            } else {
-                gameObjects[i] = new SoldierEnemy(100);
-            }
-        }
+        this.gameObjects = createGameObjects(numberObjects);
 
         this.sniperRifle = new SniperRifle(rifleDamage);
 
         this.shotsFired = 0;
     }
 
+    public GameObject[] createGameObjects(int numberObjects){
+        GameObject[] gameObjects = new GameObject[numberObjects];
+        for (int i = 0; i < numberObjects; i++) {
+            double rand = Math.random();
+            if (rand < 0.3) {
+                gameObjects[i] = new ArmouredEnemy(100, 150);
+            } else if (rand > 0.9) {
+                gameObjects[i] = new Tree();
+            } else if (rand < 0.7){
+                gameObjects[i] = new SoldierEnemy(100);
+            } else {
+                gameObjects[i] = new Barrel(BarrelType.values()[(int)(Math.random() * BarrelType.values().length)]);
+            }
+        }
+        return gameObjects;
+    }
+
     public void start() {
         for (GameObject obj1 : this.gameObjects) {
+
             if (obj1 instanceof Tree) {
                 System.out.println("Found tree. Ignoring...");
+                System.out.println(" ");
                 continue;
-            } else if (obj1 instanceof Enemy && !((Enemy) obj1).isDead) {
-                while (!((Enemy) obj1).isDead) {
-                    this.sniperRifle.shoot((Enemy) obj1);
+            } else if ((obj1 instanceof Enemy || obj1 instanceof Barrel) && !((Destroyable) obj1).isDestroyed()) {
+                System.out.println(obj1.getMessage());
+                while (!((Destroyable) obj1).isDestroyed()) {
+                    this.sniperRifle.shoot((Destroyable) obj1);
                     this.shotsFired++;
                 }
             }

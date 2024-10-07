@@ -7,12 +7,17 @@ public class SniperRifle {
         this.bulletDamage = damage;
     }
 
-    public void shoot(Enemy enemy){
+    public void shoot(Destroyable object){
         if(Math.random() > 0.8){
-            System.out.println("Shot missed. -----------------------");
+            System.out.println("Shot missed.");
             return;
         }
-        enemy.hit(this.bulletDamage);
-        System.out.println("Shot on the target.");
+        if(Math.random() < 0.2 && object instanceof Enemy){
+            System.out.println("Headshot.");
+            object.hit(this.bulletDamage * 2);
+            return;
+        }
+        System.out.println("Shot on target.");
+        object.hit(this.bulletDamage);
     }
 }
