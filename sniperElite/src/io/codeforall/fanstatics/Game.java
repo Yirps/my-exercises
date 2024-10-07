@@ -33,15 +33,15 @@ public class Game {
     public void start() {
         for (int i = 0; i < this.gameObjects.length; i++) {
             GameObject obj1 = this.gameObjects[i];
-            if(i > 0 && this.gameObjects[i - 1] instanceof Barrel && ((Destroyable)this.gameObjects[i - 1]).isDestroyed()){
-               ((Destroyable)this.gameObjects[i]).setDestroyed();
-               continue;
+            if (i > 0 && this.gameObjects[i - 1] instanceof Barrel && ((Destroyable) this.gameObjects[i - 1]).isDestroyed()) {
+                ((Destroyable) this.gameObjects[i]).setDestroyed();
+                continue;
             }
             if (obj1 instanceof Tree) {
                 System.out.println("Found tree. Ignoring...");
                 System.out.println(" ");
                 continue;
-            } else if ((obj1 instanceof Enemy || obj1 instanceof Barrel) && !((Destroyable) obj1).isDestroyed()) {
+            } else if (obj1 instanceof Destroyable && !((Destroyable) obj1).isDestroyed()) {
                 System.out.println(obj1.getMessage());
                 while (!((Destroyable) obj1).isDestroyed()) {
                     this.sniperRifle.shoot((Destroyable) obj1);
