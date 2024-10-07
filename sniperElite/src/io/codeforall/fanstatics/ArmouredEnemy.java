@@ -1,0 +1,31 @@
+package io.codeforall.fanstatics;
+
+public class ArmouredEnemy extends Enemy{
+    public int armour;
+
+    public ArmouredEnemy(int health, int armour){
+        this.health = health;
+        this.isDead = false;
+        this.armour = armour;
+    }
+    @Override
+    public void hit(int damage){
+        System.out.println("Armoured enemy shot.");
+        if(this.armour > damage){
+            this.armour -= damage;
+            return;
+        } else if (this.armour > 0){
+            this.health -= damage - this.armour;
+            this.armour = 0;
+            return;
+        } else {
+            this.health -= damage;
+        }
+
+        if(this.health <= 0){
+            System.out.println("Armoured Enemy died.");
+            this.isDead = true;
+        }
+    }
+
+}
