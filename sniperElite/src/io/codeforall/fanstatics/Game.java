@@ -5,13 +5,13 @@ public class Game {
     public SniperRifle sniperRifle;
     public int shotsFired;
 
-    public Game(int rifleDamage) {
-        this.gameObjects = new GameObject[10];
+    public Game(int numberObjects, int rifleDamage) {
+        this.gameObjects = new GameObject[numberObjects];
         for (int i = 0; i < this.gameObjects.length; i++) {
             double rand = Math.random();
             if (rand < 0.3) {
                 gameObjects[i] = new ArmouredEnemy(100, 20);
-            } else if (rand > 0.8) {
+            } else if (rand > 0.9) {
                 gameObjects[i] = new Tree();
             } else {
                 gameObjects[i] = new SoldierEnemy(100);
@@ -35,13 +35,14 @@ public class Game {
                     }
                     if(obj2 instanceof Enemy){
                         while(!((Enemy) obj2).isDead){
-                            ((Enemy) obj2).hit(this.sniperRifle.bulletDamage);
+                            this.sniperRifle.shoot((Enemy) obj2);
                             this.shotsFired++;
-                            System.out.println("Shot fired. Total shots fired: " + this.shotsFired);
                         }
                     }
                 }
             }
         }
+
+        System.out.println("Total shots fired: " + this.shotsFired);
     }
 }
