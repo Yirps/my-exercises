@@ -23,26 +23,20 @@ public class Game {
         this.shotsFired = 0;
     }
 
-    public void start(){
-        for(GameObject obj1 : this.gameObjects){
-            if(obj1 instanceof Tree){
+    public void start() {
+        for (GameObject obj1 : this.gameObjects) {
+            if (obj1 instanceof Tree) {
                 System.out.println("Found tree. Ignoring...");
                 continue;
-            } else if (obj1 instanceof Enemy && !((Enemy) obj1).isDead){
-                for(GameObject obj2 : this.gameObjects){
-                    if(obj1 == obj2){
-                        continue;
-                    }
-                    if(obj2 instanceof Enemy){
-                        while(!((Enemy) obj2).isDead){
-                            this.sniperRifle.shoot((Enemy) obj2);
-                            this.shotsFired++;
-                        }
-                    }
+            } else if (obj1 instanceof Enemy && !((Enemy) obj1).isDead) {
+                while (!((Enemy) obj1).isDead) {
+                    this.sniperRifle.shoot((Enemy) obj1);
+                    this.shotsFired++;
                 }
             }
         }
-
         System.out.println("Total shots fired: " + this.shotsFired);
     }
+
+
 }
