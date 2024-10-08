@@ -1,4 +1,4 @@
-package io.codeforall.fanstatics;
+package io.codeforall.fanstatics.destroyable;
 
 public enum BarrelType {
     PLASTIC(30, 60),

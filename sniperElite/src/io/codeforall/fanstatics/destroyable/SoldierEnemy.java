@@ -1,6 +1,6 @@
-package io.codeforall.fanstatics;
+package io.codeforall.fanstatics.destroyable;
 
-import javax.swing.*;
+import io.codeforall.fanstatics.destroyable.Enemy;
 
 public class SoldierEnemy extends Enemy {
 

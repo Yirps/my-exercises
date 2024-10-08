@@ -1,6 +1,9 @@
-package io.codeforall.fanstatics;
+package io.codeforall.fanstatics.destroyable;
 
-public class Tree extends GameObject implements Destroyable{
+import io.codeforall.fanstatics.GameObject;
+import io.codeforall.fanstatics.destroyable.Destroyable;
+
+public class Tree extends GameObject implements Destroyable {
 
     private boolean destroyed;
     private int maxDamage;

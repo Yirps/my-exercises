@@ -1,6 +1,8 @@
-package io.codeforall.fanstatics;
+package io.codeforall.fanstatics.destroyable;
 
-public class Barrel extends GameObject implements Destroyable{
+import io.codeforall.fanstatics.GameObject;
+
+public class Barrel extends GameObject implements Destroyable {
     private BarrelType barrelType;
 
     private int currentDamage;

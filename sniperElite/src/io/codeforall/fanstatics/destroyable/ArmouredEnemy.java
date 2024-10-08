@@ -1,6 +1,6 @@
-package io.codeforall.fanstatics;
+package io.codeforall.fanstatics.destroyable;
 
-public class ArmouredEnemy extends Enemy{
+public class ArmouredEnemy extends Enemy {
     public int armour;
 
     public ArmouredEnemy(int health, int armour){

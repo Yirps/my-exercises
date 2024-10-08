@@ -1,4 +1,7 @@
-package io.codeforall.fanstatics;
+package io.codeforall.fanstatics.destroyable;
+
+import io.codeforall.fanstatics.GameObject;
+import io.codeforall.fanstatics.destroyable.Destroyable;
 
 public abstract class Enemy extends GameObject implements Destroyable {
     public int health;

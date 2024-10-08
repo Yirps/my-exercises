@@ -1,5 +1,7 @@
 package io.codeforall.fanstatics;
 
+import io.codeforall.fanstatics.destroyable.*;
+
 public class Game {
     public GameObject[] gameObjects;
     public SniperRifle sniperRifle;
@@ -40,7 +42,6 @@ public class Game {
             if (obj1 instanceof Tree) {
                 System.out.println("Found tree. Ignoring...");
                 System.out.println(" ");
-                continue;
             } else if (obj1 instanceof Destroyable && !((Destroyable) obj1).isDestroyed()) {
                 System.out.println(obj1.getMessage());
                 while (!((Destroyable) obj1).isDestroyed()) {
@@ -51,11 +52,9 @@ public class Game {
                 if (obj1 instanceof Barrel) {
                     if (i > 0 && !((Destroyable) this.gameObjects[i - 1]).isDestroyed()) {
                         ((Destroyable) this.gameObjects[i - 1]).setDestroyed();
-                        //System.out.println("U destroyed a " + obj1.getMessage());
                     }
-                    if (i < this.gameObjects.length - 1 /*&& this.gameObjects[i + 1] instanceof Barrel*/) {
+                    if (i < this.gameObjects.length - 1) {
                         ((Destroyable) this.gameObjects[i + 1]).setDestroyed();
-                        //System.out.println("U destroyed a " + obj1.getMessage());
                     }
                 }
             }

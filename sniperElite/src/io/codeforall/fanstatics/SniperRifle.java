@@ -1,5 +1,8 @@
 package io.codeforall.fanstatics;
 
+import io.codeforall.fanstatics.destroyable.Destroyable;
+import io.codeforall.fanstatics.destroyable.Enemy;
+
 public class SniperRifle {
     public int bulletDamage;
 
