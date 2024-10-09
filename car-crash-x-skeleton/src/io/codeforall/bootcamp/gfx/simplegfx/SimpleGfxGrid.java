@@ -1,14 +1,22 @@
 package io.codeforall.bootcamp.gfx.simplegfx;
 
+import com.googlecode.lanterna.TerminalFacade;
+import com.googlecode.lanterna.screen.Screen;
 import io.codeforall.bootcamp.grid.Grid;
 import io.codeforall.bootcamp.grid.position.GridPosition;
 
 public class SimpleGfxGrid implements Grid {
 
+    private static Screen screen;
+
     public static final int PADDING = 10;
+    private int cols;
+    private int rows;
 
     public SimpleGfxGrid(int cols, int rows){
-        throw new UnsupportedOperationException();
+        //throw new UnsupportedOperationException();
+         this.cols = cols;
+         this.rows = rows;
     }
 
     /**
@@ -16,7 +24,16 @@ public class SimpleGfxGrid implements Grid {
      */
     @Override
     public void init() {
-        throw new UnsupportedOperationException();
+        //throw new UnsupportedOperationException();
+        screen = TerminalFacade.createScreen();
+
+        // set the grid size
+        screen.getTerminal().setCursorVisible(false); // Not Working
+        screen.getTerminal().getTerminalSize().setColumns(cols);
+        screen.getTerminal().getTerminalSize().setRows(rows);
+
+        // display the grid
+        screen.startScreen();
     }
 
     /**
@@ -24,7 +41,8 @@ public class SimpleGfxGrid implements Grid {
      */
     @Override
     public int getCols() {
-        throw new UnsupportedOperationException();
+        //throw new UnsupportedOperationException();
+        return cols;
     }
 
     /**
@@ -32,7 +50,8 @@ public class SimpleGfxGrid implements Grid {
      */
     @Override
     public int getRows() {
-        throw new UnsupportedOperationException();
+        //throw new UnsupportedOperationException();
+        return rows;
     }
 
     /**
@@ -72,7 +91,8 @@ public class SimpleGfxGrid implements Grid {
      * @return
      */
     public int getCellSize() {
-        throw new UnsupportedOperationException();
+        //throw new UnsupportedOperationException();
+        return 20;
     }
 
     /**
@@ -80,7 +100,8 @@ public class SimpleGfxGrid implements Grid {
      */
     @Override
     public GridPosition makeGridPosition() {
-        throw new UnsupportedOperationException();
+        //throw new UnsupportedOperationException();
+        return new SimpleGfxGridPosition(this);
     }
 
     /**
@@ -88,7 +109,8 @@ public class SimpleGfxGrid implements Grid {
      */
     @Override
     public GridPosition makeGridPosition(int col, int row) {
-        throw new UnsupportedOperationException();
+        //throw new UnsupportedOperationException();
+        return new SimpleGfxGridPosition(col, row, this);
     }
 
     /**
