@@ -5,6 +5,8 @@ import com.googlecode.lanterna.screen.Screen;
 import io.codeforall.bootcamp.grid.Grid;
 import io.codeforall.bootcamp.grid.position.GridPosition;
 
+import java.awt.*;
+
 public class SimpleGfxGrid implements Grid {
 
     private static Screen screen;
@@ -25,15 +27,8 @@ public class SimpleGfxGrid implements Grid {
     @Override
     public void init() {
         //throw new UnsupportedOperationException();
-        screen = TerminalFacade.createScreen();
-
-        // set the grid size
-        screen.getTerminal().setCursorVisible(false); // Not Working
-        screen.getTerminal().getTerminalSize().setColumns(cols);
-        screen.getTerminal().getTerminalSize().setRows(rows);
-
-        // display the grid
-        screen.startScreen();
+        Rectangle rectangle = new Rectangle();
+        
     }
 
     /**
