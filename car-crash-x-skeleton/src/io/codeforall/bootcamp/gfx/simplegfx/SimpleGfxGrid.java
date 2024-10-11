@@ -4,16 +4,17 @@ import com.googlecode.lanterna.TerminalFacade;
 import com.googlecode.lanterna.screen.Screen;
 import io.codeforall.bootcamp.grid.Grid;
 import io.codeforall.bootcamp.grid.position.GridPosition;
+import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 
 import java.awt.*;
 
 public class SimpleGfxGrid implements Grid {
 
-    private static Screen screen;
 
     public static final int PADDING = 10;
     private int cols;
     private int rows;
+    private Rectangle rectangle;
 
     public SimpleGfxGrid(int cols, int rows){
         //throw new UnsupportedOperationException();
@@ -27,7 +28,11 @@ public class SimpleGfxGrid implements Grid {
     @Override
     public void init() {
         //throw new UnsupportedOperationException();
-        Rectangle rectangle = new Rectangle();
+        this.rectangle = new Rectangle(PADDING, PADDING, cols, rows);
+        rectangle.draw()
+
+
+
         
     }
 
