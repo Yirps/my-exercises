@@ -1,6 +1,5 @@
 package io.codeforall.fanstatics;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Iterator;
 
@@ -23,7 +22,9 @@ public class UniqueWord implements Iterable<String>{
     }
 
     public void modifier() {
-        hs.addAll(Arrays.asList(this.strings).subList(0, strings.length));
+        for (int i = 0; i < strings.length; i++) {
+            hs.add(this.strings[i]);
+        }
     }
 
 
