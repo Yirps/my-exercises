@@ -33,9 +33,7 @@ public class WordHistogram implements Iterable<String> {
 
         for (int i = 0; i < strings.length; i++) {
             if(hm.containsKey(strings[i])) {
-
-            hm.put(strings[i], hm.get(strings[i]) +1 ) ;
-
+                hm.put(strings[i], hm.get(strings[i]) +1 ) ;
             } else {
                 hm.put(strings[i], 1);
             }
