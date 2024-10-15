@@ -82,6 +82,7 @@ public class Ball {
         }
     }
 
+
     private void show() {
         ballVisual.delete();
         ballVisual = new Ellipse(x, y, BALL_DIAMETER, BALL_DIAMETER);

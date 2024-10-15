@@ -8,8 +8,8 @@ import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class Player implements KeyboardHandler {
-    private static final Integer PLAYER_WIDTH = 70;
-    private static final Integer PLAYER_HEIGHT = 30;
+    public static final Integer PLAYER_WIDTH = 70;
+    public static final Integer PLAYER_HEIGHT = 30;
     private double x;
     private double y;
     private double velocityX;
@@ -33,6 +33,14 @@ public class Player implements KeyboardHandler {
         this.keyboard = new Keyboard(this);
 
         this.initKeyboard();
+    }
+
+    public double getX(){
+        return this.x;
+    }
+
+    public double getY(){
+        return this.y;
     }
 
     private void initKeyboard() {
