@@ -1,4 +1,5 @@
 import org.academiadecodigo.simplegraphics.graphics.Ellipse;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class Ball {
     private static final int BALL_DIAMETER = 30;
@@ -38,7 +39,7 @@ public class Ball {
         this.velocityY = vy;
     }
 
-    public void update() {
+    public void update(Player p1, Player p2) {
 
         movement();
 
@@ -79,6 +80,99 @@ public class Ball {
         if (x + BALL_DIAMETER >= Game.CANVAS_WIDTH) {
             x = Game.CANVAS_WIDTH - BALL_DIAMETER;
             velocityX = -velocityX * BOUNCINESS;
+        }
+    }
+
+    private boolean isTouching(Picture player) {
+
+        double ballCenterX = x + BALL_DIAMETER / 2;
+        double ballCenterY = y + BALL_DIAMETER / 2;
+
+        // Find the nearest point on the rectangle to the ball
+        double nearestX = Math.max(player.getX(), Math.min(ballCenterX, player.getX() + player.getWidth()));
+        double nearestY = Math.max(player.getY(), Math.min(ballCenterY, player.getY() + player.getHeight()));
+
+        double distanceX = ballCenterX - nearestX;
+        double distanceY = ballCenterY - nearestY;
+        double distanceSquared = distanceX * distanceX + distanceY * distanceY;
+
+        // If the distance is less than or equal to the ball's radius, they are touching
+        return distanceSquared <= (BALL_DIAMETER / 2) * (BALL_DIAMETER / 2);
+    }
+
+    private int getCollisionsForKick(Picture player) {
+        // If they are not touching, return "No collision"
+        if (!isTouching(player)) {
+            return 0;
+        }
+
+        double ballCenterX = x + BALL_DIAMETER / 2;
+        double ballCenterY = y + BALL_DIAMETER / 2;
+
+        // Find the nearest point on the rectangle to the ball
+        double nearestX = Math.max(player.getX(), Math.min(ballCenterX, player.getX() + player.getWidth()));
+        double nearestY = Math.max(player.getY(), Math.min(ballCenterY, player.getY() + player.getHeight()));
+
+        double vectorX = nearestX - ballCenterX;
+        double vectorY = nearestY - ballCenterY;
+
+        int[] up = { 0, 1 }; // Normal for the top side
+        int[] down = { 0, -1 }; // Normal for the bottom side
+        int[] left = { -1, 0 }; // Normal for the left side
+        int[] right = { 1, 0 }; // Normal for the right side
+
+        // Calculate dot products with each side's normal vector
+        double dotUp = vectorX * up[0] + vectorY * up[1];
+        double dotDown = vectorX * down[0] + vectorY * down[1];
+        double dotLeft = vectorX * left[0] + vectorY * left[1];
+        double dotRight = vectorX * right[0] + vectorY * right[1];
+
+        // Determine which side is closest by comparing dot products
+        double maxDot = Math.max(Math.max(dotUp, dotDown), Math.max(dotLeft, dotRight));
+
+        // Return which side of the rectangle is being touched
+        if (maxDot == dotUp) {
+            return 1; // top
+        } else if (maxDot == dotDown) {
+            return 2; // down
+        } else if (maxDot == dotLeft) {
+            return 3;// left
+        } else {
+            return 4;// right
+        }
+    }
+
+    public void getKickCollisionsForLeftPlayer(Picture leftPlayer) {
+        switch (getCollisionsForKick(leftPlayer)) {
+            case 1:// top
+                setVelocity(10, -20);
+                break;
+            case 2:// down
+                setVelocity(10, 10);
+                break;
+            case 3:// left
+                setVelocity(-20, -5);
+                break;
+            case 4:// right
+                setVelocity(20, -5);
+                break;
+        }
+    }
+
+    public void getKickCollisionsForRightPlayer(Picture rightPlayer) {
+        switch (getCollisionsForKick(rightPlayer)) {
+            case 1:// top
+                setVelocity(-10, -20);
+                break;
+            case 2:// down
+                setVelocity(-10, -10);
+                break;
+            case 3:// left
+                setVelocity(-20, -5);
+                break;
+            case 4:// right
+                setVelocity(-20, -5);
+                break;
         }
     }
 
