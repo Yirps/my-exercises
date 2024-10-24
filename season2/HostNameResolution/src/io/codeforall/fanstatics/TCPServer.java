@@ -15,18 +15,16 @@ public class TCPServer {
         System.out.println("Server is running and waiting for clients...");
 
         while (true) {
-            Socket clientSocket = serverSocket.accept();  // Accept client connection
+            Socket clientSocket = serverSocket.accept();
             PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
             BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
             String clientMessage;
-            while ((clientMessage = in.readLine()) != null) {  // Read messages from the client
+            while ((clientMessage = in.readLine()) != null) {
                 System.out.println(clientMessage);
-                // Optionally send a response to the client
-                // out.println("Message received");
             }
 
-            clientSocket.close();  // Close the connection when done with this client
+            clientSocket.close();
         }
     }
 }
