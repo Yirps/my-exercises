@@ -22,16 +22,18 @@ public class Consumer implements Runnable {
 
     @Override
     public void run() {
-        synchronized (queue) {
+       // synchronized (queue) {
             try {
                 for (int i = 0; i < elementNum; i++) {
-                    Pizza pizza = queue.poll(); // Blocking call if the queue is empty
-                    System.out.println(Thread.currentThread().getName() + " consumed " + pizza);
+                    synchronized (queue) {
+                        Pizza pizza = queue.poll(); // Blocking call if the queue is empty
+                        System.out.println(Thread.currentThread().getName() + " consumed " + pizza);
+                    }
                 }
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
                 System.out.println(Thread.currentThread().getName() + " interrupted");
             }
-        }
+
     }
 }

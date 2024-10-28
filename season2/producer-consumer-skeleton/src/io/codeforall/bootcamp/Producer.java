@@ -22,18 +22,19 @@ public class Producer implements Runnable {
 
     @Override
     public void run() {
-        synchronized (queue) {
+       // synchronized (queue) {
             try {
                 for (int i = 0; i < elementNum; i++) {
-
-                    Pizza pizza = new Pizza();
-                    queue.offer(pizza); // Blocking call if the queue is full
-                    System.out.println(Thread.currentThread().getName() + " produced " + pizza);
+                    synchronized (queue) {
+                        Pizza pizza = new Pizza();
+                        queue.offer(pizza); // Blocking call if the queue is full
+                        System.out.println(Thread.currentThread().getName() + " produced " + pizza);
+                    }
                 }
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
                 System.out.println(Thread.currentThread().getName() + " interrupted");
             }
-        }
+
     }
 }
