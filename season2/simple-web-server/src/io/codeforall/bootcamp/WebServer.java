@@ -66,8 +66,8 @@ public class WebServer {
                 Socket clientSocket = bindSocket.accept();
                 logger.log(Level.INFO, "new connection from " + getAddress(clientSocket));
 
-                dispatch(clientSocket);
-
+                ClientRequest clientRequest = new ClientRequest(clientSocket);
+                new Thread(clientRequest).start();
 
             } catch (IOException e) {
 
@@ -77,8 +77,7 @@ public class WebServer {
         }
     }
 
-    private void dispatch(Socket clientSocket) {
-
+    protected void dispatch(Socket clientSocket) {
         try {
 
             BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
