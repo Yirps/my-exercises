@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -11,7 +12,7 @@ public class ChatServer {
     public static final int LOCAL_PORT = 8085;
     private ExecutorService es;
     private ServerSocket serverSocket;
-    final Map<String, ClientDispatcher> clients = new HashMap<>();
+    final ConcurrentHashMap<String, ClientDispatcher> clients = new ConcurrentHashMap<>();
 
     public static void main(String[] args) {
         ChatServer chatServer = new ChatServer();
