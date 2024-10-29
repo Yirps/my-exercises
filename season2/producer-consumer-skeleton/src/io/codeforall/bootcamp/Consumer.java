@@ -26,7 +26,7 @@ public class Consumer implements Runnable {
             try {
                 for (int i = 0; i < elementNum; i++) {
                         Pizza pizza = queue.poll(); // Blocking call if the queue is empty
-                        Thread.sleep((long) (Math.random() * 2500));
+                        Thread.sleep((long) (Math.random() * 1000));
 
                     if(queue.getSize() == 0){
                         synchronized (queue){

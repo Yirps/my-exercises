@@ -27,7 +27,7 @@ public class Producer implements Runnable {
                 for (int i = 0; i < elementNum; i++) {
                         Pizza pizza = new Pizza();
                         queue.offer(pizza); // Blocking call if the queue is full
-                        Thread.sleep((long) (Math.random() * 2500));
+                        Thread.sleep((long) (Math.random() * 1000));
 
                         if(queue.getSize() == queue.getLimit()){
                             synchronized (queue){
