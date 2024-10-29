@@ -32,6 +32,7 @@ public class BQueue<T> {
             wait();
         }
         queue.add(data);
+        System.out.println(Thread.currentThread().getName() + " produced " + data);
         notifyAll();
         //throw new UnsupportedOperationException();
 
@@ -47,6 +48,7 @@ public class BQueue<T> {
             wait();
         }
         T data = queue.poll();
+        System.out.println(Thread.currentThread().getName() + " consumed " + data);
         notifyAll();
         return data;
         //throw new UnsupportedOperationException();

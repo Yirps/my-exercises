@@ -25,10 +25,16 @@ public class Consumer implements Runnable {
        // synchronized (queue) {
             try {
                 for (int i = 0; i < elementNum; i++) {
-                    synchronized (queue) {
                         Pizza pizza = queue.poll(); // Blocking call if the queue is empty
-                        System.out.println(Thread.currentThread().getName() + " consumed " + pizza);
+                        Thread.sleep((long) (Math.random() * 2500));
+
+                    if(queue.getSize() == 0){
+                        synchronized (queue){
+                            System.out.println("Hurry up.");
+                        }
                     }
+
+
                 }
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();

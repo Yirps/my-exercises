@@ -25,11 +25,15 @@ public class Producer implements Runnable {
        // synchronized (queue) {
             try {
                 for (int i = 0; i < elementNum; i++) {
-                    synchronized (queue) {
                         Pizza pizza = new Pizza();
                         queue.offer(pizza); // Blocking call if the queue is full
-                        System.out.println(Thread.currentThread().getName() + " produced " + pizza);
-                    }
+                        Thread.sleep((long) (Math.random() * 2500));
+
+                        if(queue.getSize() == queue.getLimit()){
+                            synchronized (queue){
+                                System.out.println("Table full.");
+                            }
+                        }
                 }
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
