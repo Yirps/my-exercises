@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -12,7 +11,7 @@ public class ChatServer {
     public static final int LOCAL_PORT = 8085;
     private ExecutorService es;
     private ServerSocket serverSocket;
-    final ConcurrentHashMap<String, ClientDispatcher> clients = new ConcurrentHashMap<>();
+    private final Map<String, ClientDispatcher> clients = new HashMap<>();
 
     public static void main(String[] args) {
         ChatServer chatServer = new ChatServer();
@@ -76,5 +75,9 @@ public class ChatServer {
     public synchronized void removeClient(String name) {
         clients.remove(name);
         broadcast(name + " has left the chat.", "Server");
+    }
+
+    public synchronized boolean isNameAvailable(String name) {
+        return !clients.containsKey(name);
     }
 }

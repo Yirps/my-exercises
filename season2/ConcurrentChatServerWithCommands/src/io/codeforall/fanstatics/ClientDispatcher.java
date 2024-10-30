@@ -9,6 +9,7 @@ public class ClientDispatcher implements Runnable {
     private PrintWriter out;
     private ChatServer chatServer;
     private String name;
+    private boolean active = true;
 
     public ClientDispatcher(Socket clientSocket, ChatServer chatServer) {
         this.clientSocket = clientSocket;
@@ -25,36 +26,40 @@ public class ClientDispatcher implements Runnable {
             in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             out = new PrintWriter(clientSocket.getOutputStream(), true);
 
-            // Prompt for a unique name
-            out.println("Enter your name:");
-            name = in.readLine().trim();
-            while (chatServer.clients.containsKey(name) || name.isEmpty()) {
-                out.println("Name already in use or invalid, please choose another:");
-                name = in.readLine().trim();
-            }
+            promptForName();
 
-            chatServer.addClient(name, this);
-            chatServer.broadcast(name + " has joined the chat.", "Server");
-
-            // Listen for client messages
-            String message;
-            while ((message = in.readLine()) != null) {
-                if (message.startsWith("/")) {
-                    processCommand(message);
-                } else {
-                    chatServer.broadcast(message, name);
+            // Main loop for receiving messages
+            while (active) {
+                String message = in.readLine();
+                if (message != null) {
+                    if (message.startsWith("/")) {
+                        processCommand(message);
+                    } else {
+                        chatServer.broadcast(message, name);
+                    }
                 }
             }
         } catch (IOException e) {
             System.err.println("Error in client handler: " + e.getMessage());
         } finally {
-            chatServer.removeClient(name);
-            try {
-                clientSocket.close();
-            } catch (IOException e) {
-                System.err.println("Error closing client socket: " + e.getMessage());
+            if (name != null) {
+                chatServer.removeClient(name);
             }
+            closeResources();
         }
+    }
+
+    private void promptForName() throws IOException {
+        out.println("Enter your name:");
+        name = in.readLine().trim();
+
+        while (!chatServer.isNameAvailable(name) || name.isEmpty()) {
+            out.println("Name already in use or invalid, please choose another:");
+            name = in.readLine().trim();
+        }
+
+        chatServer.addClient(name, this);
+        chatServer.broadcast(name + " has joined the chat.", "Server");
     }
 
     private void processCommand(String message) {
@@ -70,14 +75,36 @@ public class ClientDispatcher implements Runnable {
                 sendMessage("Usage: /whisper <name> <message>");
             }
         } else if (message.equalsIgnoreCase("/quit")) {
-            chatServer.removeClient(name);
+            active = false;
             sendMessage("You have left the chat.");
+        } else if (message.equalsIgnoreCase("/help")) {
+            sendHelp();
         } else {
             sendMessage("Unknown command: " + message);
         }
     }
 
+    private void sendHelp() {
+        sendMessage("Available commands:");
+        sendMessage("/list - List all connected clients");
+        sendMessage("/whisper <name> <message> - Send a private message to a specific user");
+        sendMessage("/quit - Leave the chat");
+        sendMessage("/help - Show this help message");
+    }
+
     public void sendMessage(String message) {
-        out.println(message);
+        if (active) {
+            out.println(message);
+        }
+    }
+
+    private void closeResources() {
+        try {
+            if (clientSocket != null && !clientSocket.isClosed()) {
+                clientSocket.close();
+            }
+        } catch (IOException e) {
+            System.err.println("Error closing client socket: " + e.getMessage());
+        }
     }
 }

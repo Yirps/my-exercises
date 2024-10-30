@@ -1,3 +1,5 @@
+package io.codeforall.fanstatics;
+
 import java.io.*;
 import java.net.Socket;
 import java.util.Scanner;
@@ -13,12 +15,11 @@ public class ChatClient {
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
             Scanner scanner = new Scanner(System.in);
 
-            // Send messages to the server
             while (true) {
                 String message = scanner.nextLine();
                 out.println(message);
                 if (message.equalsIgnoreCase("/quit")) {
-                    break;
+                    break; // Client stops sending messages after /quit
                 }
             }
         } catch (IOException e) {
