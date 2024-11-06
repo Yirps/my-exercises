@@ -5,8 +5,8 @@ import java.net.*;
 import java.util.concurrent.*;
 
 public class ResilientServer {
-    private static final int PORT = 8090;
-    private static final int MAX_THREADS = 10; // Maximum concurrent threads
+    private static final int PORT = 8080;
+    private static final int MAX_THREADS = 1000;
 
     public static void main(String[] args) {
         ExecutorService threadPool = Executors.newFixedThreadPool(MAX_THREADS);
@@ -16,8 +16,9 @@ public class ResilientServer {
 
             while (true) {
                 Socket clientSocket = serverSocket.accept();
-                // Submit the client handler to the thread pool
                 threadPool.submit(() -> handleClient(clientSocket));
+                System.out.println(Thread.currentThread().getName());
+
             }
         } catch (IOException e) {
             System.err.println("Server error: " + e.getMessage());

@@ -4,7 +4,7 @@ import java.io.*;
 import java.net.*;
 
 public class VulnerableServer {
-    private static final int PORT = 8090;
+    private static final int PORT = 8080;
 
     public static void main(String[] args) {
         try (ServerSocket serverSocket = new ServerSocket(PORT)) {
@@ -12,8 +12,8 @@ public class VulnerableServer {
 
             while (true) {
                 Socket clientSocket = serverSocket.accept();
-                // Each client request spawns a new thread
                 new Thread(() -> handleClient(clientSocket)).start();
+                System.out.println(Thread.currentThread().getName());
             }
         } catch (IOException e) {
             System.err.println("Server error: " + e.getMessage());
