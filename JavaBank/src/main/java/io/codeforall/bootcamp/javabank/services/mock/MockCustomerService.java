@@ -1,20 +1,17 @@
-package io.codeforall.bootcamp.javabank.services;
+package io.codeforall.bootcamp.javabank.services.mock;
 
-import io.codeforall.bootcamp.javabank.manager.ConnectionManager;
 import io.codeforall.bootcamp.javabank.model.Customer;
 import io.codeforall.bootcamp.javabank.model.account.Account;
+import io.codeforall.bootcamp.javabank.services.CustomerService;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.*;
 
 /**
  * An {@link CustomerService} implementation
  */
-public class CustomerServiceImpl implements CustomerService {
+public class MockCustomerService implements CustomerService {
 
-    //private Map<Integer, Customer> customerMap = new HashMap<>();
+    private Map<Integer, Customer> customerMap = new HashMap<>();
 
     /**
      * Gets the next account id
@@ -28,23 +25,9 @@ public class CustomerServiceImpl implements CustomerService {
     /**
      * @see CustomerService#get(Integer)
      */
-    public Void get(Integer id) throws SQLException {
-
-        String customerName;
-
-        Statement statement = ConnectionManager.connection.createStatement();
-
-        String query = "SELECT customer_name FROM customers WHERE customer_id = (id)";
-
-        ResultSet resultSet = statement.executeQuery(query);
-
-        if(resultSet.next()){
-            customerName = resultSet.getNString(id);
-            System.out.println(customerName);
-        }
-
-        System.out.println("Fail");
-
+    @Override
+    public Customer get(Integer id) {
+        return customerMap.get(id);
     }
 
     /**
