@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConnectionManager {
-    private Connection connection = null;
+    public static Connection connection = null;
     private String dbUrl ="jdbc:mysql://localhost/javabank";
     private String user = "root";
     private String pass="";

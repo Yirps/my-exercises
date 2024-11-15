@@ -2,6 +2,7 @@ package io.codeforall.bootcamp.javabank.services;
 
 import io.codeforall.bootcamp.javabank.model.Customer;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Set;
 
@@ -16,7 +17,7 @@ public interface CustomerService {
      * @param id the customer id
      * @return the customer with the given id
      */
-    Customer get(Integer id);
+    Customer get(Integer id) throws SQLException;
 
     /**
      * Gets the list of customers
