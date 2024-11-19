@@ -73,11 +73,11 @@ public class Cadet {
         this.age = age;
     }
 
-    public Cadet findById(Integer Id){
+    public static Cadet findById(EntityManagerFactory emf, Integer Id){
 
         EntityManager em = emf.createEntityManager();
-
-        return em.find(Cadet.class, Id);
-
+        Cadet cadet = em.find(Cadet.class, Id);
+        em.close();
+        return cadet;
     }
 }

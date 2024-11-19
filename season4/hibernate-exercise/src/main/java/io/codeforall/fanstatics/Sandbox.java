@@ -29,8 +29,13 @@ public class Sandbox {
         em.getTransaction().begin();
         em.persist(cadet);
         em.merge(mc);
-        cadet.findById(1);
         em.getTransaction().commit();
+
+        Cadet cadet1 = Cadet.findById(emf, 1);
+        Cadet cadet2 = em.find(Cadet.class, 1);
+
+        System.out.printf("Cadet ID: %d, %d%n", cadet1.getId(), cadet2.getId());
+        System.out.printf("Cadet Name: %s, %s%n", cadet1.getName(), cadet2.getName());
 
         // Close the database connection
         em.close();
