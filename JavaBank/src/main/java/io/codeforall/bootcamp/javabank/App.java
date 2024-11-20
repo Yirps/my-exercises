@@ -1,12 +1,13 @@
 package io.codeforall.bootcamp.javabank;
 
 import io.codeforall.bootcamp.javabank.controller.Controller;
-import io.codeforall.bootcamp.javabank.factories.AccountFactory;
-import io.codeforall.bootcamp.javabank.model.Customer;
+import io.codeforall.bootcamp.javabank.persistence.daos.jdbc.JDBCAccountDao;
+import io.codeforall.bootcamp.javabank.persistence.daos.jdbc.JDBCCustomerDao;
 import io.codeforall.bootcamp.javabank.persistence.jdbc.JDBCSessionManager;
+import io.codeforall.bootcamp.javabank.persistence.jdbc.JDBCTransactionManager;
+import io.codeforall.bootcamp.javabank.services.AccountServiceImpl;
 import io.codeforall.bootcamp.javabank.services.AuthServiceImpl;
-import io.codeforall.bootcamp.javabank.services.jdbc.JdbcAccountService;
-import io.codeforall.bootcamp.javabank.services.jdbc.JdbcCustomerService;
+import io.codeforall.bootcamp.javabank.services.CustomerServiceImpl;
 
 public class App {
 
@@ -14,35 +15,39 @@ public class App {
 
         App app = new App();
         app.bootStrap();
-        JdbcCustomerService cs = new JdbcCustomerService(new JDBCSessionManager());
-
-        Customer customer = new Customer();
-        customer.setEmail("akjshdkhjasd");
-        customer.setFirstName("Batata");
-        customer.setLastName("Frita");
-        cs.add(customer);
-
     }
 
     private void bootStrap() {
 
-        JDBCSessionManager jdbcSessionManager = new JDBCSessionManager();
+        JDBCSessionManager JDBCSessionManager = new JDBCSessionManager();
+        JDBCTransactionManager transactionManager = new JDBCTransactionManager();
+        transactionManager.setConnectionManager(JDBCSessionManager);
+        JDBCAccountDao JDBCAccountDao = new JDBCAccountDao();
+        JDBCCustomerDao JDBCCustomerDao = new JDBCCustomerDao();
 
-        AccountFactory accountFactory = new AccountFactory();
-        JdbcAccountService accountService = new JdbcAccountService(jdbcSessionManager, accountFactory);
-        JdbcCustomerService customerService = new JdbcCustomerService(jdbcSessionManager);
-        customerService.setAccountService(accountService);
+        JDBCAccountDao.setConnectionManager(JDBCSessionManager);
+        JDBCCustomerDao.setAccountDAO(JDBCAccountDao);
+        JDBCCustomerDao.setConnectionManager(JDBCSessionManager);
+
+        AccountServiceImpl accountService = new AccountServiceImpl();
+        CustomerServiceImpl customerService = new CustomerServiceImpl();
+
+        customerService.setCustomerDAO(JDBCCustomerDao);
+        customerService.setTm(transactionManager);
+
+        accountService.setAccountDAO(JDBCAccountDao);
+        accountService.setTm(transactionManager);
 
         Bootstrap bootstrap = new Bootstrap();
         bootstrap.setAuthService(new AuthServiceImpl());
         bootstrap.setAccountService(accountService);
         bootstrap.setCustomerService(customerService);
-        bootstrap.setAccountFactory(accountFactory);
         Controller controller = bootstrap.wireObjects();
 
         // start application
         controller.init();
 
-        jdbcSessionManager.stopSession();
+        JDBCSessionManager.stopSession();
+
     }
 }

@@ -7,41 +7,46 @@ import java.sql.SQLException;
 public class JDBCTransactionManager implements TransactionManager {
 
     private JDBCSessionManager sm;
-    @Override
-    public void beginRead() {
-         sm.startSession();
+
+    public void setConnectionManager(JDBCSessionManager JDBCSessionManager) {
+        this.sm = JDBCSessionManager;
     }
 
-    @Override
+    public void beginRead() {
+            sm.startSession();
+    }
+
     public void beginWrite() {
         try {
-            sm.getCurrentConnection().setAutoCommit(false);
-        }catch (SQLException ex){
-            ex.printStackTrace();
+            sm.getCurrentSession().setAutoCommit(false);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
     }
 
-    @Override
     public void commit() {
+
         try {
-            if (!sm.getCurrentConnection().getAutoCommit()) {
-                sm.getCurrentConnection().commit();
+            if (!sm.getCurrentSession().getAutoCommit()) {
+                sm.getCurrentSession().commit();
             }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
+
         sm.stopSession();
     }
 
-    @Override
     public void rollback() {
+
         try {
-            if (!sm.getCurrentConnection().getAutoCommit()) {
-                sm.getCurrentConnection().rollback();
+            if (!sm.getCurrentSession().getAutoCommit()) {
+                sm.getCurrentSession().rollback();
             }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
+
         sm.stopSession();
     }
 }

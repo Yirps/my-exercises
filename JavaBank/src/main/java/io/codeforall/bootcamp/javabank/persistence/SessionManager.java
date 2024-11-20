@@ -1,12 +1,20 @@
 package io.codeforall.bootcamp.javabank.persistence;
 
-import java.sql.Connection;
+public interface SessionManager<T> {
+    /**
+     * Starts the session
+     */
+    void startSession();
 
-public interface SessionManager {
+    /**
+     * Stops the session
+     */
+    void stopSession();
 
-    public void startSession();
-
-    public void stopSession();
-
-    public Connection getCurrentConnection();
+    /**
+     * Gets the current session
+     *
+     * @return the current session
+     */
+    T getCurrentSession();
 }

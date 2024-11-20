@@ -6,7 +6,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class JDBCSessionManager implements SessionManager {
+public class JDBCSessionManager implements SessionManager<Connection> {
 
     private static final String DEFAULT_USER = "root";
     private static final String DEFAULT_PASS = "";
@@ -26,14 +26,16 @@ public class JDBCSessionManager implements SessionManager {
         this.dbUrl = CONNECTOR + "//" + host + "/" + database;
     }
 
-    public JDBCSessionManager(){
+    public JDBCSessionManager() {
         this(DEFAULT_USER, DEFAULT_PASS, DEFAULT_HOST, DEFAULT_DB);
     }
 
+
     @Override
     public void startSession() {
+
         try {
-            if (connection == null) {
+            if (connection == null || connection.isClosed()) {
                 connection = DriverManager.getConnection(dbUrl, user, pass);
             }
         } catch (SQLException ex) {
@@ -53,7 +55,7 @@ public class JDBCSessionManager implements SessionManager {
     }
 
     @Override
-    public Connection getCurrentConnection() {
+    public Connection getCurrentSession() {
         startSession();
         return connection;
     }

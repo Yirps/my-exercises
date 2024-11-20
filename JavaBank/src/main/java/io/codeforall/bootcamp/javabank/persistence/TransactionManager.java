@@ -1,12 +1,23 @@
 package io.codeforall.bootcamp.javabank.persistence;
 
 public interface TransactionManager {
+    /**
+     * Begin reading
+     */
+    void beginRead();
 
-    public void beginRead();
+    /**
+     * Begin writing
+     */
+    void beginWrite();
 
-    public void beginWrite();
+    /**
+     * Commit the transaction
+     */
+    void commit();
 
-    public void commit();
-
-    public void rollback();
+    /**
+     * Rollback the transaction
+     */
+    void rollback();
 }

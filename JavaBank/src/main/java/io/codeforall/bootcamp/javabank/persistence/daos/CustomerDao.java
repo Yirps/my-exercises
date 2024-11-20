@@ -4,13 +4,12 @@ import io.codeforall.bootcamp.javabank.model.Customer;
 
 import java.util.List;
 
-public interface CustomerDao {
+public interface CustomerDao extends Dao<Customer> {
 
-    public Customer get(Integer id);
-
-    public List<Customer> list();
-
-    public void add(Customer customer);
-
-
+    /**
+     * Gets a list of customer ids
+     *
+     * @return the list of customer ids
+     */
+    List<Integer> getCustomerIds();
 }
