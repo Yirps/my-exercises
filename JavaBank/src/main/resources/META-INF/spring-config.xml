@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <!-- Enable support for JPA annotations -->
+    <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/>
+
+    <!-- c3p0 database connection pool management -->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+
+        <property name="driverClass" value="com.mysql.cj.jdbc.Driver"/>
+        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/javabank?useSSL=false"/>
+        <property name="user" value="root"/>
+        <property name="password" value=""/>
+
+        <!-- c3p0 database connection pool management properties -->
+        <property name="minPoolSize" value="1"/>
+        <property name="maxPoolSize" value="10"/>
+        <property name="acquireIncrement" value="1"/>
+        <property name="maxStatements" value="0"/>
+
+        <!-- destroy idle pool after 300ms -->
+        <property name="idleConnectionTestPeriod" value="300"/>
+
+        <!-- destroy db connection if it fails to login after 7200ms -->
+        <property name="loginTimeout" value="7200"/>
+
+    </bean>
+
+    <bean id="emFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+
+    <property name="dataSource" ref="dataSource"/>
+    <property name="packagesToScan" value="io.codeforall.bootcamp.javabank.model"/>
+    <property name="jpaVendorAdapter">
+        <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
+    </property>
+    <property name="jpaProperties">
+        <map>
+            <entry key="hibernate.show_sql" value="true" />
+            <entry key="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect"/>
+            <!-- Validate database schema, data loss can occur if set to create or update -->
+            <entry key="hibernate.hbm2ddl.auto" value="create"/>
+        </map>
+    </property>
+    </bean>
+
+
+    <!-- Inputs and Outputs -->
+    <util:constant id="stdin" static-field="java.lang.System.in"/>
+    <util:constant id="stdout" static-field="java.lang.System.out"/>
+
+    <!-- wire login controller and view -->
+    <bean id="prompt" class="org.academiadecodigo.bootcamp.Prompt">
+        <constructor-arg name="input" ref="stdin"/>
+        <constructor-arg name="output" ref="stdout"/>
+    </bean>
+
+    <bean id="loginView" class="io.codeforall.bootcamp.javabank.view.LoginView">
+        <property name="loginController" ref="loginController"/>
+        <property name="prompt" ref="prompt"/>
+    </bean>
+
+    <bean id="authService" class="io.codeforall.bootcamp.javabank.services.AuthServiceImpl"/>
+
+    <bean id="loginController" class="io.codeforall.bootcamp.javabank.controller.LoginController">
+        <property name="view" ref="loginView"/>
+        <property name="authService" ref="authService"/>
+        <property name="nextController" ref="mainController"/>
+    </bean>
+
+    <!-- wire main controller and view -->
+    <bean id="mainController" class="io.codeforall.bootcamp.javabank.controller.MainController">
+        <property name="view" ref="mainView"/>
+        <property name="authService" ref="authService"/>
+    </bean>
+
+    <bean id="mainView" class="io.codeforall.bootcamp.javabank.view.MainView">
+        <property name="prompt" ref="prompt"/>
+        <property name="mainController" ref="mainController"/>
+    </bean>
+
+    <!-- wire balance controller and view -->
+    <bean id="balanceController" class="io.codeforall.bootcamp.javabank.controller.BalanceController">
+        <property name="view" ref="balanceView"/>
+        <property name="customerService" ref="customerService"/>
+        <property name="authService" ref="authService"/>
+    </bean>
+
+    <bean id="balanceView" class="io.codeforall.bootcamp.javabank.view.BalanceView">
+        <property name="balanceController" ref="balanceController"/>
+    </bean>
+
+    <!-- customer service -->
+    <bean id="customerService" class="io.codeforall.bootcamp.javabank.services.CustomerServiceImpl"/>
+
+    <!-- wire new account controller and view-->
+    <bean id="newAccountView" class="io.codeforall.bootcamp.javabank.view.NewAccountView">
+        <property name="newAccountController" ref="newAccountController"/>
+    </bean>
+
+    <bean id="newAccountController" class="io.codeforall.bootcamp.javabank.controller.NewAccountController">
+        <property name="accountService" ref="accountService"/>
+        <property name="authService" ref="authService"/>
+        <property name="accountFactory" ref="accountFactory"/>
+        <property name="view" ref="newAccountView"/>
+    </bean>
+
+    <!-- wire account transactions controllers and view-->
+    <bean id="depositController" class="io.codeforall.bootcamp.javabank.controller.transaction.DepositController">
+        <property name="authService" ref="authService"/>
+        <property name="accountService" ref="accountService"/>
+        <property name="customerService" ref="customerService"/>
+        <property name="view" ref="depositView"/>
+    </bean>
+
+    <bean id="withdrawalController" class="io.codeforall.bootcamp.javabank.controller.transaction.WithdrawalController">
+        <property name="authService" ref="authService"/>
+        <property name="customerService" ref="customerService"/>
+        <property name="accountService" ref="accountService"/>
+        <property name="view" ref="withdrawView"/>
+    </bean>
+
+    <bean id="depositView" class="io.codeforall.bootcamp.javabank.view.AccountTransactionView">
+        <property name="prompt" ref="prompt"/>
+        <property name="transactionController" ref="depositController"/>
+    </bean>
+
+    <bean id="withdrawView" class="io.codeforall.bootcamp.javabank.view.AccountTransactionView">
+        <property name="prompt" ref="prompt"/>
+        <property name="transactionController" ref="withdrawalController"/>
+    </bean>
+
+    <!-- account Service and accountFactory -->
+    <bean id="accountService" class="io.codeforall.bootcamp.javabank.services.AccountServiceImpl"/>
+
+    <bean id="accountFactory" class="io.codeforall.bootcamp.javabank.factories.AccountFactory"/>
+
+    <!-- wire recipients controller and view -->
+    <bean id="recipientsController" class="io.codeforall.bootcamp.javabank.controller.RecipientsController">
+        <property name="view" ref="recipientsView"/>
+        <property name="authService" ref="authService"/>
+        <property name="customerService" ref="customerService"/>
+    </bean>
+
+    <bean id="recipientsView" class="io.codeforall.bootcamp.javabank.view.RecipientsView">
+        <property name="recipientsController" ref="recipientsController"/>
+    </bean>
+
+    <!-- controller map -->
+    <bean id="controllerMap" class="io.codeforall.bootcamp.javabank.controller.MainController">
+        <property name="controllerMap">
+            <map>
+                <entry key="1" value="balanceController"/>
+                <entry key="2" value="depositController"/>
+                <entry key="3" value="withdrawalController"/>
+                <entry key="4" value="newAccountController"/>
+                <entry key="5" value="recipientsView"/>
+            </map>
+        </property>
+    </bean>
+
+</beans>

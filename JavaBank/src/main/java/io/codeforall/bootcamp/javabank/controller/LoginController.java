@@ -1,11 +1,12 @@
 package io.codeforall.bootcamp.javabank.controller;
 
 import io.codeforall.bootcamp.javabank.view.LoginView;
+import org.springframework.beans.factory.InitializingBean;
 
 /**
  * The {@link LoginView} controller
  */
-public class LoginController extends AbstractController {
+public class LoginController extends AbstractController implements InitializingBean {
 
     private Controller nextController;
     private boolean authFailed = false;
@@ -42,5 +43,10 @@ public class LoginController extends AbstractController {
      */
     public boolean isAuthFailed() {
         return authFailed;
+    }
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+
     }
 }
