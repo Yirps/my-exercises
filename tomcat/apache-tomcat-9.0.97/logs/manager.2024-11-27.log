@@ -1,0 +1,22 @@
+27-Nov-2024 14:59:03.407 INFO [http-nio-8080-exec-3] org.apache.catalina.core.ApplicationContext.log Manager: init: Associated with Deployer 'Catalina:type=Deployer,host=localhost'
+27-Nov-2024 14:59:03.407 INFO [http-nio-8080-exec-3] org.apache.catalina.core.ApplicationContext.log Manager: init: Global resources are available
+27-Nov-2024 14:59:03.411 INFO [http-nio-8080-exec-3] org.apache.catalina.core.ApplicationContext.log Manager: deploy: Deploying web application '/mvccustomer'
+27-Nov-2024 14:59:03.411 INFO [http-nio-8080-exec-3] org.apache.catalina.core.ApplicationContext.log Manager: Uploading WAR file to /Users/codecadet/Documents/apache-tomcat-9.0.97/webapps/mvccustomer.war
+27-Nov-2024 14:59:47.745 INFO [http-nio-8080-exec-10] org.apache.catalina.core.ApplicationContext.log HTMLManager: list: Listing contexts for virtual host 'localhost'
+27-Nov-2024 15:01:10.201 INFO [http-nio-8080-exec-3] org.apache.catalina.core.ApplicationContext.log Manager: deploy: Deploying web application '/mvccustomer'
+27-Nov-2024 15:01:36.541 INFO [http-nio-8080-exec-5] org.apache.catalina.core.ApplicationContext.log Manager: undeploy: Undeploying web application at '/mvccustomer'
+27-Nov-2024 15:01:47.332 INFO [http-nio-8080-exec-7] org.apache.catalina.core.ApplicationContext.log Manager: deploy: Deploying web application '/mvccustomer'
+27-Nov-2024 15:01:47.332 INFO [http-nio-8080-exec-7] org.apache.catalina.core.ApplicationContext.log Manager: Uploading WAR file to /Users/codecadet/Documents/apache-tomcat-9.0.97/webapps/mvccustomer.war
+27-Nov-2024 15:02:20.364 INFO [http-nio-8080-exec-1] org.apache.catalina.core.ApplicationContext.log Manager: undeploy: Undeploying web application at '/mvccustomer'
+27-Nov-2024 15:02:27.690 INFO [http-nio-8080-exec-11] org.apache.catalina.core.ApplicationContext.log Manager: deploy: Deploying web application '/mvccustomer'
+27-Nov-2024 15:02:27.690 INFO [http-nio-8080-exec-11] org.apache.catalina.core.ApplicationContext.log Manager: Uploading WAR file to /Users/codecadet/Documents/apache-tomcat-9.0.97/webapps/mvccustomer.war
+27-Nov-2024 15:08:19.478 INFO [http-nio-8080-exec-15] org.apache.catalina.core.ApplicationContext.log Manager: undeploy: Undeploying web application at '/mvccustomer'
+27-Nov-2024 15:08:26.878 INFO [http-nio-8080-exec-20] org.apache.catalina.core.ApplicationContext.log Manager: deploy: Deploying web application '/mvccustomer'
+27-Nov-2024 15:08:26.878 INFO [http-nio-8080-exec-20] org.apache.catalina.core.ApplicationContext.log Manager: Uploading WAR file to /Users/codecadet/Documents/apache-tomcat-9.0.97/webapps/mvccustomer.war
+27-Nov-2024 15:14:49.790 INFO [http-nio-8080-exec-25] org.apache.catalina.core.ApplicationContext.log Manager: undeploy: Undeploying web application at '/mvccustomer'
+27-Nov-2024 15:14:59.338 INFO [http-nio-8080-exec-32] org.apache.catalina.core.ApplicationContext.log Manager: deploy: Deploying web application '/mvccustomer'
+27-Nov-2024 15:14:59.338 INFO [http-nio-8080-exec-32] org.apache.catalina.core.ApplicationContext.log Manager: Uploading WAR file to /Users/codecadet/Documents/apache-tomcat-9.0.97/webapps/mvccustomer.war
+27-Nov-2024 15:17:28.087 INFO [http-nio-8080-exec-35] org.apache.catalina.core.ApplicationContext.log Manager: undeploy: Undeploying web application at '/mvccustomer'
+27-Nov-2024 15:17:34.930 INFO [http-nio-8080-exec-37] org.apache.catalina.core.ApplicationContext.log Manager: deploy: Deploying web application '/mvccustomer'
+27-Nov-2024 15:17:34.930 INFO [http-nio-8080-exec-37] org.apache.catalina.core.ApplicationContext.log Manager: Uploading WAR file to /Users/codecadet/Documents/apache-tomcat-9.0.97/webapps/mvccustomer.war
+27-Nov-2024 15:31:01.776 INFO [http-nio-8080-exec-42] org.apache.catalina.core.ApplicationContext.log Manager: undeploy: Undeploying web application at '/mvccustomer'

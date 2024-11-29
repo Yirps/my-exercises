@@ -1,0 +1,18 @@
+27-Nov-2024 14:59:03.416 INFO [http-nio-8080-exec-3] org.apache.catalina.startup.HostConfig.deployWAR Deploying web application archive [/Users/codecadet/Documents/apache-tomcat-9.0.97/webapps/mvccustomer.war]
+27-Nov-2024 14:59:03.444 INFO [http-nio-8080-exec-3] org.apache.catalina.startup.HostConfig.deployWAR Deployment of web application archive [/Users/codecadet/Documents/apache-tomcat-9.0.97/webapps/mvccustomer.war] has finished in [28] ms
+27-Nov-2024 15:01:36.562 INFO [http-nio-8080-exec-5] org.apache.catalina.startup.HostConfig.undeploy Undeploying context [/mvccustomer]
+27-Nov-2024 15:01:47.334 INFO [http-nio-8080-exec-7] org.apache.catalina.startup.HostConfig.deployWAR Deploying web application archive [/Users/codecadet/Documents/apache-tomcat-9.0.97/webapps/mvccustomer.war]
+27-Nov-2024 15:01:47.363 INFO [http-nio-8080-exec-7] org.apache.catalina.startup.HostConfig.deployWAR Deployment of web application archive [/Users/codecadet/Documents/apache-tomcat-9.0.97/webapps/mvccustomer.war] has finished in [29] ms
+27-Nov-2024 15:02:20.388 INFO [http-nio-8080-exec-1] org.apache.catalina.startup.HostConfig.undeploy Undeploying context [/mvccustomer]
+27-Nov-2024 15:02:27.692 INFO [http-nio-8080-exec-11] org.apache.catalina.startup.HostConfig.deployWAR Deploying web application archive [/Users/codecadet/Documents/apache-tomcat-9.0.97/webapps/mvccustomer.war]
+27-Nov-2024 15:02:27.719 INFO [http-nio-8080-exec-11] org.apache.catalina.startup.HostConfig.deployWAR Deployment of web application archive [/Users/codecadet/Documents/apache-tomcat-9.0.97/webapps/mvccustomer.war] has finished in [27] ms
+27-Nov-2024 15:08:19.489 INFO [http-nio-8080-exec-15] org.apache.catalina.startup.HostConfig.undeploy Undeploying context [/mvccustomer]
+27-Nov-2024 15:08:26.880 INFO [http-nio-8080-exec-20] org.apache.catalina.startup.HostConfig.deployWAR Deploying web application archive [/Users/codecadet/Documents/apache-tomcat-9.0.97/webapps/mvccustomer.war]
+27-Nov-2024 15:08:26.909 INFO [http-nio-8080-exec-20] org.apache.catalina.startup.HostConfig.deployWAR Deployment of web application archive [/Users/codecadet/Documents/apache-tomcat-9.0.97/webapps/mvccustomer.war] has finished in [29] ms
+27-Nov-2024 15:14:49.801 INFO [http-nio-8080-exec-25] org.apache.catalina.startup.HostConfig.undeploy Undeploying context [/mvccustomer]
+27-Nov-2024 15:14:59.340 INFO [http-nio-8080-exec-32] org.apache.catalina.startup.HostConfig.deployWAR Deploying web application archive [/Users/codecadet/Documents/apache-tomcat-9.0.97/webapps/mvccustomer.war]
+27-Nov-2024 15:14:59.371 INFO [http-nio-8080-exec-32] org.apache.catalina.startup.HostConfig.deployWAR Deployment of web application archive [/Users/codecadet/Documents/apache-tomcat-9.0.97/webapps/mvccustomer.war] has finished in [31] ms
+27-Nov-2024 15:17:28.093 INFO [http-nio-8080-exec-35] org.apache.catalina.startup.HostConfig.undeploy Undeploying context [/mvccustomer]
+27-Nov-2024 15:17:34.932 INFO [http-nio-8080-exec-37] org.apache.catalina.startup.HostConfig.deployWAR Deploying web application archive [/Users/codecadet/Documents/apache-tomcat-9.0.97/webapps/mvccustomer.war]
+27-Nov-2024 15:17:34.962 INFO [http-nio-8080-exec-37] org.apache.catalina.startup.HostConfig.deployWAR Deployment of web application archive [/Users/codecadet/Documents/apache-tomcat-9.0.97/webapps/mvccustomer.war] has finished in [30] ms
+27-Nov-2024 15:31:01.784 INFO [http-nio-8080-exec-42] org.apache.catalina.startup.HostConfig.undeploy Undeploying context [/mvccustomer]
