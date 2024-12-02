@@ -51,4 +51,5 @@ public interface CustomerService {
     List<Recipient> listRecipients(Integer id);
 
     public void deleteCustomer(Integer id);
+    Customer save(Customer customer);
 }
