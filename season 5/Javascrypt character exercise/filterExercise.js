@@ -38,3 +38,12 @@ console.log(characters[2].email);
 console.log(filter(characters, criteria1));
 console.log(filter(characters, criteria2));
 console.log(filter(characters, criteria3));
+
+
+let arr = [ 1, 'fine', true ];
+arr[3] = { name: 'Neo', chosenOne: true };
+
+console.log(arr[0]); // 1
+console.log(arr[1]); // 'fine'
+console.log(arr[2]); // true
+console.log(arr[3]); // { name: 'Neo', chosenOne: true }
