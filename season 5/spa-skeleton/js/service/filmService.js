@@ -46,3 +46,5 @@ async function getFilms() {
 }
 
 export default { getFilm, getFilms };
+
+//https://github.com/anhduy1202/demon-slayer-api/blob/master/README.md
