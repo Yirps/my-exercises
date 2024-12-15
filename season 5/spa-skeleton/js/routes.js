@@ -7,6 +7,10 @@ export const routes = {
         path: '/films',
         controller: 'filmController'
     },
+    demon: {
+        path: '/demon',
+        controller: 'demonController'
+    },
     currentPath: {
         path: '',
         controller: ''

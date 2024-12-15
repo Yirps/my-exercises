@@ -7,7 +7,8 @@ function render(films) {
 
     films.forEach(({ title, year, director, imdbRating: rating }) => {
         const item = document.createElement('div');
-        item.className = `col card text-white bg-primary mb-3" style="max-width: 18rem;`;
+        item.className = "col card text-white bg-primary mb-3" 
+        item.style="min-width: 18rem";
         item.innerHTML = `<div class="card-header">${director}</div>
                             <div class="card-body">
                                 <h5 class="card-title">${title}</h5>
