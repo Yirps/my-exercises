@@ -17,10 +17,21 @@ async function fetchCharacters() {
 async function fetchCharacter(urlName) {
     const api = `https://demon-slayer-api.onrender.com/v1/${urlName}`;
     const response = await fetch(api);
-    const character = (await response.json())[0];
+    const character = await response.json();
     character.gallery = character.gallery.map(stripImagePath);
     character.image = stripImagePath(character.image);
-    return character;
+    
+    return {
+        name: character.name,
+        image: character.image,
+        gallery: character.gallery,
+        race: character.race,
+        gender: character.gender,
+        age: character.age,
+        height: character.height,
+        weight: character.weight,
+        birthday: character.birthday
+    };
 }
 
 
