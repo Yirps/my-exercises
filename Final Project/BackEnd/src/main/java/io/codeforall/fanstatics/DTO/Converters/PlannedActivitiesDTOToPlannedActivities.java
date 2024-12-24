@@ -12,9 +12,17 @@ public class PlannedActivitiesDTOToPlannedActivities implements Converter<Planne
 
     private PlannedActivitiesServiceInterface plannedActivitiesService;
 
+
+    private ActivityDTOToActivity activityDTOToActivity;
+
     @Autowired
     public void setPlannedActivitiesService(PlannedActivitiesServiceInterface plannedActivitiesService) {
         this.plannedActivitiesService = plannedActivitiesService;
+    }
+
+    @Autowired
+    public void setActivityDTOToActivity(ActivityDTOToActivity activityDTOToActivity) {
+        this.activityDTOToActivity = activityDTOToActivity;
     }
 
     @Override
@@ -26,7 +34,7 @@ public class PlannedActivitiesDTOToPlannedActivities implements Converter<Planne
         plannedActivities.setLocation(plannedActivitiesDTO.getLocation());
         plannedActivities.setTime(plannedActivitiesDTO.getTime());
         plannedActivities.setNumberOfPeople(plannedActivitiesDTO.getNumberOfPeople());
-        plannedActivities.setActivity(plannedActivitiesDTO.getActivity());
+        plannedActivities.setActivity(activityDTOToActivity.convert(plannedActivitiesDTO.getActivity()));
         return plannedActivities;
     }
 }

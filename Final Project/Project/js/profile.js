@@ -49,7 +49,7 @@ fetchDataActivity();
 
 async function createActivity(newActivity) {
     try {
-        const response = await fetch(API_ACTIVITIES_URL, {
+        const response = await fetch(API_ACTIVITIES_URL + '/add', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
